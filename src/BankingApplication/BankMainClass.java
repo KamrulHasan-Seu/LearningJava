@@ -5,9 +5,7 @@ import java.util.Scanner;
 public class BankMainClass {
     public static void main(String[] args) {
         CustomerModel customerModel =new CustomerModel();
-        //Showing Menu
-        Menu.showMenu();
-
+        BankingFunctionality bankingFunctionality = new BankingFunctionality();
         int choice;
         do {
             //Taking Menu Number from user
@@ -20,28 +18,49 @@ public class BankMainClass {
                 case 1:
                     System.out.println("How Many Customer you want to open?");
                     int openCustomerLength = sc.nextInt();
-                    customerModel.openAccount(openCustomerLength);
+
+                    for (int i=1;i<=openCustomerLength;i++){
+                        System.out.println("Enter Account No");
+                        int accountId = sc.nextInt();
+                        System.out.println("Enter Customer Name");
+                        String customerName = sc.next();
+                        System.out.println("Enter Account Type");
+                        String accountType = sc.next();
+                        System.out.println("Enter Initial Balance");
+                        long balance = sc.nextInt();
+
+                        bankingFunctionality.openAccount(accountId,customerName,accountType,balance);
+                    }
+
                     break;
                 case 2:
                     System.out.println("==================================");
                     System.out.println("Enter Account No. you want to see...");
                     int accNo = sc.nextInt();
-                    customerModel.showAccountInfo(accNo);
+                    bankingFunctionality.showAccountInfo(accNo);
                     System.out.println("==================================");
                     break;
                 case 3:
                     System.out.println("==================================");
-                    customerModel.depositInAccount();
+                    System.out.println("Enter Your Account Number: ");
+                    int accNoFromDeposit = sc.nextInt();
+                    System.out.println("How Much Money you want to deposit: ");
+                    long depositAmount = sc.nextInt();
+                    bankingFunctionality.depositInAccount(accNoFromDeposit,depositAmount);
                     System.out.println("==================================");
                     break;
                 case 4:
                     System.out.println("==================================");
-                    customerModel.withdrawfromAccount();
+                    System.out.println("Enter Your Account Number: ");
+                    int accNoFromWithdrawn = sc.nextInt();
+                    System.out.println("How Much Money you want to WithDraw: ");
+                    long withdrawAmount=sc.nextLong();
+                    bankingFunctionality.withdrawfromAccount(accNoFromWithdrawn,withdrawAmount);
                     System.out.println("==================================");
                     break;
                 case 5:
                     System.out.println("==================================");
-                    customerModel.showAllCustomerInfo();
+                    bankingFunctionality.showAllCustomerInfo();
                     System.out.println("==================================");
                     break;
 
@@ -51,20 +70,6 @@ public class BankMainClass {
             }
         }while(choice!=6);
 
-
-
-
-
-
-//        System.out.println("How Many Customer you want to open?");
-//        int openCustomerLength = sc.nextInt();
-//
-//        CustomerModel[] customerModels =new CustomerModel[openCustomerLength];
-//
-//        for(int i =0;i<openCustomerLength;i++){
-//            customerModels[i] = new CustomerModel();
-//            customerModels[i].openAccount();
-//        }
 
 
     }
